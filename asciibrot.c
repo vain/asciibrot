@@ -225,6 +225,7 @@ main(int argc, char **argv)
 	struct Options o;
 	char *buf;
 
+	usleep(0.25 * 1e6);
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
 	o.iterations = 15;
