@@ -245,7 +245,7 @@ main(int argc, char **argv)
 	o.height = w.ws_row;
 	o.fun = mandelbrot_loop;
 	o.charset = " .:-+=oO0#";
-	o.inchar = '`';
+	o.inchar = '@';
 	o.animate = 0;
 	o.bounce = 1;
 	o.delay = 0.03;
