@@ -88,6 +88,7 @@ draw(struct Options *o)
 	int x_term, y_term, is_in;
 	double x, y;
 	double v;
+	size_t chari;
 
 	for (y_term = 0; y_term < height; y_term++)
 	{
@@ -105,7 +106,12 @@ draw(struct Options *o)
 			if (is_in)
 				printf("%c", o->inchar);
 			else
-				printf("%c", o->charset[(int)(v * strlen(o->charset))]);
+			{
+				chari = (int)(v * strlen(o->charset));
+				if (chari >= strlen(o->charset))
+					chari = strlen(o->charset) - 1;
+				printf("%c", o->charset[chari]);
+			}
 		}
 
 		if (y_term < height - 1)
