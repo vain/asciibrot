@@ -240,7 +240,7 @@ main(int argc, char **argv)
 	o.charset = " .:-+=oO0#";
 	o.inchar = '`';
 	o.animate = 0;
-	o.bounce = 0;
+	o.bounce = 1;
 	o.delay = 0.03;
 
 	while ((opt = getopt(argc, argv, "c:C:i:z:p:J:jf:abd:s:")) != -1)
@@ -277,7 +277,7 @@ main(int argc, char **argv)
 				o.animate = 1;
 				break;
 			case 'b':
-				o.bounce = 1;
+				o.bounce = 0;
 				break;
 			case 'd':
 				o.delay = atof(optarg);
