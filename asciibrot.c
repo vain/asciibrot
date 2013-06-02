@@ -246,7 +246,7 @@ main(int argc, char **argv)
 	int opt;
 	struct Options o;
 
-	o.iterations = 15;
+	o.iterations = 30;
 	o.real = 0;
 	o.imag = 0;
 	o.jreal = -0.46;
