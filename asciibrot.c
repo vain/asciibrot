@@ -313,7 +313,10 @@ main(int argc, char **argv)
 	if (o.animate)
 		animate(&o);
 	else
+	{
 		draw(&o);
+		printf("\n");
+	}
 
 	exit(EXIT_SUCCESS);
 }
