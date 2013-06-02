@@ -15,7 +15,7 @@ Options
 	double jreal, jimag;
 	double zoom;
 	double fontaspect;
-	int width, height;
+	int width, height, fixed_size;
 	int (*fun)(double, double, struct Options *, double *);
 	char *charset, inchar;
 	int animate;
@@ -83,12 +83,27 @@ draw(struct Options *o)
 	double x_add = o->real, y_add = o->imag;
 	double x_mul = o->fontaspect * o->zoom;
 	double y_mul = o->zoom;
-	int width = o->width, height = o->height;
-	double c = fmin(width * o->fontaspect, height);
+	struct winsize w;
+	int width, height;
 	int x_term, y_term, is_in;
 	double x, y;
 	double v;
 	size_t chari;
+	double c;
+
+	if (o->fixed_size)
+	{
+		width = o->width;
+		height = o->height;
+	}
+	else
+	{
+		ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+		width = w.ws_col;
+		height = w.ws_row;
+	}
+
+	c = fmin(width * o->fontaspect, height);
 
 	for (y_term = 0; y_term < height; y_term++)
 	{
@@ -229,12 +244,8 @@ int
 main(int argc, char **argv)
 {
 	int opt;
-	struct winsize w;
 	struct Options o;
 	char *buf;
-
-	usleep(0.25 * 1e6);
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
 	o.iterations = 15;
 	o.real = 0;
@@ -243,14 +254,13 @@ main(int argc, char **argv)
 	o.jimag = 0.58;
 	o.zoom = 1;
 	o.fontaspect = 0.5;
-	o.width = w.ws_col;
-	o.height = w.ws_row;
 	o.fun = mandelbrot_loop;
 	o.charset = " .:-+=oO0#";
 	o.inchar = '@';
 	o.animate = 0;
 	o.bounce = 1;
 	o.delay = 0.03;
+	o.fixed_size = 0;
 
 	while ((opt = getopt(argc, argv, "c:C:i:z:p:J:jf:abd:s:")) != -1)
 	{
@@ -293,6 +303,7 @@ main(int argc, char **argv)
 				break;
 			case 's':
 				spliti(optarg, 'x', &o.width, &o.height);
+				o.fixed_size = 1;
 				break;
 		}
 	}
