@@ -158,7 +158,7 @@ animate(struct Options *o)
 	int radius_choice = rand() % 3;
 	double radius_span = radius_span_choices[radius_choice];
 	double radius_off = radius_off_choices[radius_choice];;
-	double radius_bounce, rot_rad, jx, jy;
+	double radius_bounce, rot_rad;
 	double zoom_d_bounce, zoom_r_rad;
 
 	int zoom_d = rand() % 3600;
@@ -181,11 +181,8 @@ animate(struct Options *o)
 		radius_bounce = sin((radius / 10.0) * M_PI / 180) * radius_span + radius_off;
 		rot_rad = (rot / 10.0) * M_PI / 180;
 
-		jx = 0;
-		jy = radius_bounce;
-
-		o->jreal = jx * cos(rot_rad) - jy * sin(rot_rad);
-		o->jimag = jx * sin(rot_rad) + jy * cos(rot_rad);
+		o->jreal = -radius_bounce * sin(rot_rad);
+		o->jimag = radius_bounce * cos(rot_rad);
 
 		if (o->bounce)
 		{
