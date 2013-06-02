@@ -254,7 +254,7 @@ main(int argc, char **argv)
 	o.zoom = 1;
 	o.fontaspect = 0.5;
 	o.fun = mandelbrot_loop;
-	o.charset = " .:-+=oO0#";
+	o.charset = NULL;  /* Default value is set after getopt() */
 	o.inchar = '@';
 	o.animate = 0;
 	o.bounce = 1;
@@ -266,6 +266,8 @@ main(int argc, char **argv)
 		switch (opt)
 		{
 			case 'c':
+				if (o.charset != NULL)
+					free(o.charset);
 				o.charset = malloc(BUFSIZ);
 				strncpy(o.charset, optarg, BUFSIZ);
 				break;
@@ -305,6 +307,9 @@ main(int argc, char **argv)
 				break;
 		}
 	}
+
+	if (o.charset == NULL)
+		o.charset = " .:-+=oO0#";
 
 	srand(time(NULL));
 
