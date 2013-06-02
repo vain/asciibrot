@@ -154,6 +154,8 @@ animate(struct Options *o)
 
 	o->fun = julia_loop;
 	signal(SIGINT, animate_end);
+	signal(SIGHUP, animate_end);
+	signal(SIGTERM, animate_end);
 
 	printf("%s", civis);
 
