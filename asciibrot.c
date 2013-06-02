@@ -138,9 +138,9 @@ animate(struct Options *o)
 	int radius_add = radius_add_choices[rand() % 6];
 	int rot_add_choices[] = {-6, -4, -2, 2, 4, 6};
 	int rot_add = rot_add_choices[rand() % 6];
-	double radius_span_choices[] = {0.5, 0.3};
-	double radius_off_choices[] = {0.3, 0.7};
-	int radius_choice = rand() % 2;
+	double radius_span_choices[] = {0.5, 0.1, 0.35};
+	double radius_off_choices[] = {0.5, 0.77, 0.85};
+	int radius_choice = rand() % 3;
 	double radius_span = radius_span_choices[radius_choice];
 	double radius_off = radius_off_choices[radius_choice];;
 	double radius_bounce, rot_rad, jx, jy;
