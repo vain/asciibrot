@@ -245,7 +245,6 @@ main(int argc, char **argv)
 {
 	int opt;
 	struct Options o;
-	char *buf;
 
 	o.iterations = 15;
 	o.real = 0;
@@ -267,9 +266,8 @@ main(int argc, char **argv)
 		switch (opt)
 		{
 			case 'c':
-				buf = malloc(BUFSIZ);
-				strncpy(buf, optarg, BUFSIZ);
-				o.charset = buf;
+				o.charset = malloc(BUFSIZ);
+				strncpy(o.charset, optarg, BUFSIZ);
 				break;
 			case 'C':
 				o.inchar = optarg[0];
