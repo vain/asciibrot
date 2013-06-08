@@ -210,31 +210,29 @@ animate(struct Options *o)
 }
 
 void
-split(char *from, char delim, double *a, double *b)
+splitd(char *str, char *delim, double *a, double *b)
 {
-	char *copy, *sec;
-	copy = malloc(BUFSIZ);
-	strncpy(copy, from, BUFSIZ);
-	sec = strchr(copy, delim);
-	if (copy == NULL)
-	{
-		fprintf(stderr, "Malformed argument.\n");
-		exit(EXIT_FAILURE);
-	}
-	*sec = 0;
-	sec++;
-	*a = atof(copy);
-	*b = atof(sec);
-	free(copy);
+	char copy[BUFSIZ] = "";
+	char *part_a = NULL, *part_b = NULL;
+	strncpy(copy, str, BUFSIZ);
+	part_a = strtok(copy, delim);
+	if (part_a != NULL)
+		part_b = strtok(NULL, delim);
+	*a = part_a == NULL ? 0 : atof(part_a);
+	*b = part_b == NULL ? 0 : atof(part_b);
 }
 
 void
-spliti(char *from, char delim, int *a, int *b)
+spliti(char *str, char *delim, int *a, int *b)
 {
-	double ta, tb;
-	split(from, delim, &ta, &tb);
-	*a = (int)ta;
-	*b = (int)tb;
+	char copy[BUFSIZ] = "";
+	char *part_a = NULL, *part_b = NULL;
+	strncpy(copy, str, BUFSIZ);
+	part_a = strtok(copy, delim);
+	if (part_a != NULL)
+		part_b = strtok(NULL, delim);
+	*a = part_a == NULL ? 0 : atoi(part_a);
+	*b = part_b == NULL ? 0 : atoi(part_b);
 }
 
 int
@@ -278,10 +276,10 @@ main(int argc, char **argv)
 				o.zoom = atof(optarg);
 				break;
 			case 'p':
-				split(optarg, ':', &o.real, &o.imag);
+				splitd(optarg, ":", &o.real, &o.imag);
 				break;
 			case 'J':
-				split(optarg, ':', &o.jreal, &o.jimag);
+				splitd(optarg, ":", &o.jreal, &o.jimag);
 				break;
 			case 'j':
 				o.fun = julia_loop;
@@ -299,7 +297,7 @@ main(int argc, char **argv)
 				o.delay = atof(optarg);
 				break;
 			case 's':
-				spliti(optarg, 'x', &o.width, &o.height);
+				spliti(optarg, "x", &o.width, &o.height);
 				o.fixed_size = 1;
 				break;
 		}
