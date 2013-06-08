@@ -300,6 +300,8 @@ main(int argc, char **argv)
 				spliti(optarg, "x", &o.width, &o.height);
 				o.fixed_size = 1;
 				break;
+			default:
+				exit(EXIT_FAILURE);
 		}
 	}
 
