@@ -1,0 +1,177 @@
+.TH ASCIIBROT 6 "June 2013" "asciibrot" "ASCII fractal renderer"
+.SH NAME
+asciibrot \- ASCII fractal renderer
+.SH SYNOPSIS
+\fBasciibrot\fP [\fIOPTION\fP]...
+.SH DESCRIPTION
+asciibrot can render images of the Mandelbrot set and Julia sets. It has
+three modes:
+.P
+.IP \(bu 4
+Mandelbrot (default)
+.IP \(bu 4
+Julia
+.IP \(bu 4
+Animated Julia
+.SH OPTIONS
+By default, \fBasciibrot\fP renders a Mandelbrot at (0, 0).
+.TP
+\fB\-c\fP \fICHARSET\fP
+Charset. Defaults to \(lq\fB .:-+=oO0#\fP\(rq (note that the first
+character is a space). The first character means \(lqvery dark\(rq, the
+last character means \(lqvery bright\(rq.
+.TP
+\fB\-C\fP \fIINCHAR\fP
+Character to use \fBinside\fP the set. Defaults to \fB@\fP.
+.TP
+\fB\-i\fP \fIITERATIONS\fP
+Number of iterations. Defaults to \fB30\fP.
+.TP
+\fB\-z\fP \fIZOOM\fP
+Smaller means more zooming in. Defaults to \fB1\fP (no zoom).
+.TP
+\fB\-p\fP \fIREAL\fP:\fIIMAGINARY\fP
+Center at this coordinate. Something like \fB1.08:0.42\fP where
+\fB1.08\fP is the real part and \fB0.42\fP is the imaginary part.
+Defaults to \fB0:0\fP.
+.TP
+\fB\-j\fP
+Activate Julia mode.
+.TP
+\fB\-J\fP \fIREAL\fP:\fIIMAGINARY\fP
+(Julia mode.) Julia parameter. Something like \fB-0.46:0.58\fP where
+\fB-0.46\fP is the real part and \fB0.58\fP is the imaginary part.
+Defaults to \fB-0.46:0.58\fP.
+.TP
+\fB\-a\fP
+Animate a Julia set. Defaults to false.
+.TP
+\fB\-b\fP
+(Animated Julia set.) Do not zoom in and out (i.e., no
+\(lqbouncing\(rq). Bouncing is \fBactivated\fP by default.
+.TP
+\fB\-d\fP \fIDELAY\fP
+(Animated Julia set.) Number of seconds to wait after a frame has been
+drawn. Defaults to \fB0.1\fP.
+.TP
+\fB\-s\fP \fIWIDTH\fPx\fIHEIGHT\fP
+Size of the image. Defaults to your current terminal size in characters.
+.TP
+\fB\-f\fP \fIFONTASPECT\fP
+Font aspect ratio. If your font size is 8x16 pixels, you need to set
+this to \fB0.5\fP. Defaults to \fB0.5\fP. Take care to get this value
+right, otherwise your images will look very odd.
+.SH EXAMPLES
+Of course, the larger your terminal, the better the results. I suggest
+to use a program like \fBXaoS\fP(6) to actually explore the sets. You'll
+also have to learn how to \(lqread\(rq the ASCII images. :-)
+.P
+\f(CW
+.nf
+\&$ asciibrot -p '-0.5:0' -s '80x24'
+
+\&                                    ...........::+:-@......
+\&                                 .............::-=+::........
+\&                               .............:-=@@@@=@:.........
+\&                             .............::::O@@@@@@:::........
+\&                          ...........++0-:-@-@=o@@@o++-=-::::=...
+\&                        ............::+@@@@@@@@@@@@@@@@@@+@@@0:...
+\&                    ...............:--+@@@@@@@@@@@@@@@@@@@@@=:.....
+\&               ......::.......:::::-=@@@@@@@@@@@@@@@@@@@@@@@@-::...
+\&          ...........:=--::O-:::::-@@@@@@@@@@@@@@@@@@@@@@@@@@@@-....
+\&       .............:::+@@@@@@@O--+@@@@@@@@@@@@@@@@@@@@@@@@@@@-:....
+\&      ............:::-@@@@@@@@@@@Oo@@@@@@@@@@@@@@@@@@@@@@@@@@@-......
+\&     ..........:::-#=o#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-:......
+\&    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+::.......
+\&     ..........:::-#=o#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-:......
+\&      ............:::-@@@@@@@@@@@Oo@@@@@@@@@@@@@@@@@@@@@@@@@@@-......
+\&       .............:::+@@@@@@@O--+@@@@@@@@@@@@@@@@@@@@@@@@@@@-:....
+\&          ...........:=--::O-:::::-@@@@@@@@@@@@@@@@@@@@@@@@@@@@-....
+\&               ......::.......:::::-=@@@@@@@@@@@@@@@@@@@@@@@@-::...
+\&                    ...............:--+@@@@@@@@@@@@@@@@@@@@@=:.....
+\&                        ............::+@@@@@@@@@@@@@@@@@@+@@@0:...
+\&                          ...........++0-:-@-@=o@@@o++-=-::::=...
+\&                             .............::::O@@@@@@:::........
+\&                               .............:-=@@@@=@:.........
+\&                                 .............::-=+::........
+
+.fi
+\fP
+.P
+\f(CW
+.nf
+\&$ asciibrot -j -i 50 -s '80x24'
+
+\&                                         .O+.
+\&                                        .:-@::.
+\&                                      @@@@@@o@..... ...
+\&                                      ..:oo=+-@=@..:O@@...  ...-@@.
+\&                                      ..OO@@@@@@@@:@@0+:..@O@.:#@o...
+\&                                    .....:O--+==oO@o=@@+:@o@@@@0@0o@...+
+\&                                   ...:.:--@0@@@@@@@@O@@-+@@=+o#@@@=0oo@@
+\&                                ...:0@@-#@@#oO@@@@@@@#@@+=@@+-+@oo@#0:O+.=
+\&                        oo........:@0o==@@o==@@@@@@@@0ooO@@@@::@@=@..
+\&                      ..o@@@:......+@O@@@@=+=@@0O@@@@@@@Oo#@0....@.
+\&                      :=+o@++@OO-:::@0@#@O@++O0@0oo=++-::....
+\&                     ...@@@@@@@@@#----#@@@#----#@@@@@@@@@...
+\&                    ....::-++=oo0@0O++@O@#@0@:::-OO@++@o+=:
+\&              .@....0@#oO@@@@@@@O0@@=+=@@@@O@+......:@@@o..
+\&            ..@=@@::@@@@Ooo0@@@@@@@@==o@@==o0@:........oo
+\&       =.+O:0#@oo@+-+@@=+@@#@@@@@@@Oo#@@#-@@0:...
+\&        @@oo0=@@@#o+=@@+-@@O@@@@@@@@0@--:.:...
+\&         +...@o0@0@@@@o@:+@@=o@Oo==+--O:.....
+\&            ...o@#:.@O@..:+0@@:@@@@@@@@OO..
+\&              .@@-...  ...@@O:..@=@-+=oo:..
+\&                          ... .....@o@@@@@@
+\&                                  .::@-:.
+\&                                    .+O.
+
+.fi
+\fP
+.P
+\f(CW
+.nf
+\&$ asciibrot -j -J '0.28:0.01' -p '-0.08119729:0.90977874' \\
+\&	-z '39.2287E-3' -i 130 -s '80x24'
+
+\&........................................::::@+o@o=+O@#@o+-=+
+\&.........................................::::-@@@=-+@++o0=oo
+\&..........................................::::::=-------:.--
+\&...........................................::::::+@#@++o@@@-.
+\&............................................:::::-@0#=@oO@@0#.
+\&............................................::::::#O---@+=--oo
+\&...........................................::::::::=------::::
+\&...........................................:::::::::=0#=+O@@@.
+\&.........................................:::::::::::@@O+@@@@+#
+\&.......................................::::::::::::::----=o-=@.
+\&.............................:::::::::::::::::::::::-=@o=oO::..
+\&..........................--@@+O=Oo@::::::::::::::::+@O=o@@@@.
+\&........................+-@O+=-----o@=::::::::::::::=---+=O@:.
+\&.......................@@@+0--------=@:::::::::::::O@=@@-=:@:.
+\&.....................:oO++@---:--++-@-::::::::::::::@@=o0@....
+\&......................@0o@#-::::::-@::::::::::::::@@--+=oo-...
+\&.....................@+O++--::::::::::::::::::::::@@@=-::+@...
+\&.....................@@@oOo-::::::::::::::::::::o--@O@@@.....
+\&......................-:0++0O::::::::::::::::::@O@@+#o==.....
+\&......................:O0#0o++--:::::::::::@@0--0oO@::-......
+\&.........................::@=o=O++@0#@-@@+-+==@+@o@o.........
+\&.........................@==@@0++@=@#++==@+=@@@::@=..........
+\&.............................::-o@@o-0=@@-:@=0:..............
+\&...............................=@-.::o+@O.@#.................
+.fi
+\fP
+.SH BUGS
+\fBasciibrot\fP has only been tested in an XTerm and a Linux VT.
+.P
+If you find a bug, I'd happy to hear about it. Either use the bug
+tracker at \fIhttps://github.com/vain/asciibrot\fP or send an e-mail to
+\fIpcode@uninformativ.de\fP. If that doesn't work, then you should find
+up to date contact information at \fIhttp://uninformativ.de\fP or
+\fIgopher://uninformativ.de\fP.
+.SH LICENSE
+\fBasciibrot\fP is released as \(lqPIZZA-WARE\(rq. See the accompanying
+\fILICENSE\fP file.
+.SH AUTHORS
+\fBasciibrot\fP and this man page were written by Peter Hofmann.
+.SH "SEE ALSO"
+.BR XaoS (6)
