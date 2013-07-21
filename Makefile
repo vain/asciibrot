@@ -3,16 +3,16 @@ EXECUTABLE = asciibrot
 CFLAGS += -Wall -Wextra -O3
 LDFLAGS += -lm
 
-INSTALL=install
-INSTALL_PROGRAM=$(INSTALL)
-INSTALL_DATA=$(INSTALL) -m 644
+INSTALL = install
+INSTALL_PROGRAM = $(INSTALL)
+INSTALL_DATA = $(INSTALL) -m 644
 
-prefix=/usr/local
-exec_prefix=$(prefix)
-bindir=$(exec_prefix)/bin
-datarootdir=$(prefix)/share
-mandir=$(datarootdir)/man
-man6dir=$(mandir)/man6
+prefix = /usr/local
+exec_prefix = $(prefix)
+bindir = $(exec_prefix)/bin
+datarootdir = $(prefix)/share
+mandir = $(datarootdir)/man
+man6dir = $(mandir)/man6
 
 
 .PHONY: clean install installdirs
