@@ -271,6 +271,8 @@ main(int argc, char **argv)
 				break;
 			case 'C':
 				o.inchar = optarg[0];
+				if (o.inchar == 0)
+					o.inchar = ' ';
 				break;
 			case 'i':
 				o.iterations = atoi(optarg);
