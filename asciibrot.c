@@ -215,6 +215,7 @@ splitd(char *str, char *delim, double *a, double *b)
 	char copy[BUFSIZ] = "";
 	char *part_a = NULL, *part_b = NULL;
 	strncpy(copy, str, BUFSIZ);
+	copy[BUFSIZ - 1] = 0;
 	part_a = strtok(copy, delim);
 	if (part_a != NULL)
 		part_b = strtok(NULL, delim);
@@ -228,6 +229,7 @@ spliti(char *str, char *delim, int *a, int *b)
 	char copy[BUFSIZ] = "";
 	char *part_a = NULL, *part_b = NULL;
 	strncpy(copy, str, BUFSIZ);
+	copy[BUFSIZ - 1] = 0;
 	part_a = strtok(copy, delim);
 	if (part_a != NULL)
 		part_b = strtok(NULL, delim);
@@ -265,6 +267,7 @@ main(int argc, char **argv)
 					free(o.charset);
 				o.charset = malloc(BUFSIZ);
 				strncpy(o.charset, optarg, BUFSIZ);
+				o.charset[BUFSIZ - 1] = 0;
 				break;
 			case 'C':
 				o.inchar = optarg[0];
