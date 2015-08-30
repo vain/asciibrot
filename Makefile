@@ -1,7 +1,7 @@
 EXECUTABLE = asciibrot
 
 CFLAGS += -Wall -Wextra -O3
-LDFLAGS += -lm
+LDLIBS += -lm
 
 INSTALL = install
 INSTALL_PROGRAM = $(INSTALL)
@@ -15,10 +15,9 @@ mandir = $(datarootdir)/man
 man6dir = $(mandir)/man6
 
 
-.PHONY: clean install installdirs
+.PHONY: all clean install installdirs
 
-$(EXECUTABLE): $(EXECUTABLE).c
-	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(EXECUTABLE).c $(LDFLAGS)
+all: $(EXECUTABLE)
 
 clean:
 	rm -fv $(EXECUTABLE)
