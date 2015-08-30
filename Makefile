@@ -20,7 +20,7 @@ man6dir = $(mandir)/man6
 all: $(EXECUTABLE)
 
 clean:
-	rm -fv $(EXECUTABLE)
+	rm -f $(EXECUTABLE)
 
 install: $(EXECUTABLE) installdirs
 	$(INSTALL_PROGRAM) $(EXECUTABLE) $(DESTDIR)$(bindir)/$(EXECUTABLE)
