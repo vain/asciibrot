@@ -164,9 +164,9 @@ animate(struct Options *o)
 	int zoom_d = rand() % 3600;
 	int zoom_r = rand() % 36000;
 
-	char *topleft = "\e[1;1H";
-	char *civis = "\e[?25l";
-	char *cnorm = "\e[?12l\e[?25h";
+	char *topleft = "\033[1;1H";
+	char *civis = "\033[?25l";
+	char *cnorm = "\033[?12l\033[?25h";
 
 	o->fun = julia_loop;
 	signal(SIGINT, animate_end);
