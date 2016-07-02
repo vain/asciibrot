@@ -157,7 +157,7 @@ animate(struct Options *o)
 	double radius_off_choices[] = {0.5, 0.77, 0.85};
 	int radius_choice = rand() % 3;
 	double radius_span = radius_span_choices[radius_choice];
-	double radius_off = radius_off_choices[radius_choice];;
+	double radius_off = radius_off_choices[radius_choice];
 	double radius_bounce, rot_rad;
 	double zoom_d_bounce, zoom_r_rad;
 
