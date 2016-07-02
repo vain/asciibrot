@@ -7,6 +7,8 @@
 #include <time.h>
 #include <signal.h>
 
+static char animation_running = 1;
+
 struct
 Options
 {
@@ -139,9 +141,7 @@ animate_end(int dummy)
 {
 	(void)dummy;
 
-	char *cnorm = "\e[?12l\e[?25h";
-	printf("%s\n", cnorm);
-	exit(EXIT_SUCCESS);
+	animation_running = 0;
 }
 
 void
@@ -166,6 +166,7 @@ animate(struct Options *o)
 
 	char *topleft = "\e[1;1H";
 	char *civis = "\e[?25l";
+	char *cnorm = "\e[?12l\e[?25h";
 
 	o->fun = julia_loop;
 	signal(SIGINT, animate_end);
@@ -174,7 +175,7 @@ animate(struct Options *o)
 
 	printf("%s", civis);
 
-	while (1)
+	while (animation_running)
 	{
 		printf("%s", topleft);
 
@@ -207,6 +208,8 @@ animate(struct Options *o)
 
 		usleep(o->delay * 1e6);
 	}
+
+	printf("%s\n", cnorm);
 }
 
 void
